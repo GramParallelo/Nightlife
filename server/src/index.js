@@ -43,7 +43,7 @@ mongoose.connect(mongooseUri, options)
 
 let db = mongoose.connection
 
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'connection error:'))
 
 ////////////////////////
 
@@ -56,12 +56,14 @@ app.use('/api/auth', auth)
 app.use('/api/bars', bars)
 
 if (process.env.NODE_ENV === 'production') {
-  app.set('port', process.env.PORT)
-  app.use(express.static('src/build'));
+    app.set('port', process.env.PORT)
+    app.use(express.static('src/build'))
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve('src/build/index.html'));
+    })
 } else {
-  app.set('port', 8080)
+    app.set('port', 8080)
 }
-
 
 app.listen(app.get('port'), () => {
     console.log(`Running server on LocalHost:${app.get('port')}`)
