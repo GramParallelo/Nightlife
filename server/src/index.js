@@ -56,9 +56,13 @@ app.use('/api/auth', auth)
 app.use('/api/bars', bars)
 
 if (process.env.NODE_ENV === 'production') {
+  app.set('port', process.env.PORT)
   app.use(express.static('src/build'));
+} else {
+  app.set('port', 8080)
 }
 
-app.listen(process.env.PORT || 8080, () => {
-    console.log('Running server on LocalHost:8080')
+
+app.listen(app.get('port'), () => {
+    console.log(`Running server on LocalHost:${app.get('port')}`)
 })

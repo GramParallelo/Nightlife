@@ -18,6 +18,6 @@ class BarList extends Component {
 
 BarList.propsTypes = {
 
-};
+}
 
 export default BarList;
