@@ -55,6 +55,10 @@ app.use('/api/users', users)
 app.use('/api/auth', auth)
 app.use('/api/bars', bars)
 
-app.listen(8080, () => {
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('src/build'));
+}
+
+app.listen(process.env.PORT || 8080, () => {
     console.log('Running server on LocalHost:8080')
 })

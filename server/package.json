@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nf start -p 3000",
     "server": "nodemon --watch src --exec babel-node -- src/index.js",
+    "server-prod": "babel-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
