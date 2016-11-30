@@ -33,6 +33,18 @@ class LoginForm extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.onChange = this.onChange.bind(this)
         this.signup = this.signup.bind(this)
+        this.onSignIn = this.onSignIn.bind(this)
+        this.signOut = this.signOut.bind(this);
+    }
+    componentDidMount() {
+        console.log('hellp');
+        window.gapi.signin2.render('g-signin2', {
+        'scope': 'https://www.googleapis.com/auth/plus.login',
+        'width': 125,
+        'height': 30,
+        'theme': 'light',
+        'onsuccess': this.onSignIn
+      });
     }
     onSubmit(e) {
         e.preventDefault()
@@ -59,8 +71,22 @@ class LoginForm extends React.Component {
       e.preventDefault()
       this.context.router.push('/signup')
     }
+    onSignIn(googleUser) {
+      // let profile = googleUser.getBasicProfile()
+      let idToken = googleUser.getAuthResponse().id_token
+
+      this.props.login({googleToken: idToken, password: ''}).then((res) => {
+        this.context.router.push('/')
+      })
+    }
+    signOut() {
+      window.gapi.auth2.getAuthInstance().signOut().then(function () {
+        console.log('User signed out.');
+      })
+    }
     render() {
         const {errors, identifier, password, isLoading} = this.state
+
         return (
           <div className="row">
             <div className="col-md-4 col-md-offset-4">
@@ -74,10 +100,15 @@ class LoginForm extends React.Component {
 
                         <div className="form-group">
                             <button className="btn btn-primary btn-lg" disabled={isLoading}>Login</button>
+
+
                         </div>
                     </form>
-                    <label> Not a user?! ==> </label>
-                    <button className="" onClick={this.signup}>Signup</button>
+                    <div id="g-signin2"></div>
+                    <a href="#" onClick={this.signOut}>Sign out</a>
+
+                    <label id="notauser"> Not a user?! ==> </label>
+                    <button id="notauser" className="" onClick={this.signup}>Signup</button>
                 </div>
             </div>
         );

@@ -10,7 +10,9 @@ class NavigationBar extends React.Component {
     }
     render() {
         const {isAuthenticated} = this.props.auth
-        const active = { borderBottom: '2px solid #3f51b5' }
+        const active = {
+            borderBottom: '3px solid #04beca'
+        }
 
         const userLinks = (
             <div>
@@ -44,7 +46,15 @@ class NavigationBar extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <Link className="navbar-brand" to="/" activeStyle={active}  onlyActiveOnIndex={true}>WHOSE GOING OUT TAH-NIGHT!!s!</Link>
+                        
+                        <Link className="navbar-brand" to="/" activeStyle={active} onlyActiveOnIndex={true}>
+                            <span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                            <span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+
+                              WHOSE GOING OUT TAH-NIGHT !!
+                            <span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                            <span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                        </Link>
                     </div>
 
                     {/* <!-- Collect the nav links, forms, and other content for toggling --> */}

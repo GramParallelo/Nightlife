@@ -25,6 +25,10 @@ export function login(data) {
 export function logout() {
   return dispatch => {
     localStorage.removeItem('jwtToken')
+    console.log(window.gapi);
+    window.gapi.auth2.getAuthInstance().signOut().then(function () {
+      console.log('User signed out.');
+    })
     setAuthorizationToken(false)
     dispatch(setCurrentUser({}))
   }

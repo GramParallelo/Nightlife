@@ -7,7 +7,7 @@ import SignupPage from './components/signup/SignupPage'
 import LoginPage from './components/login/LoginPage'
 
 
-import requireAuth from './utils/requireAuth'
+//import requireAuth from './utils/requireAuth' // use this to have only user access page
 
 export default (
   <Route path="/" component={App} >
