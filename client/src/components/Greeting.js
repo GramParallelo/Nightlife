@@ -17,6 +17,8 @@ function validateInput(search) {
     return {errors, isValid: isEmpty(errors)}
 }
 
+// TODO: EXTRACT COMPONENT FROM THIS
+
 class Greeting extends React.Component {
     constructor(props) {
         super(props)
@@ -62,7 +64,6 @@ class Greeting extends React.Component {
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true}) // , isLoading: true
             this.props.getBars(this.state.search).then((res) => {
-                console.log(res.data, this.props.search);
                 this.setState({bars: res.data[1], data: true, isLoading: false})
             })
         }
@@ -127,11 +128,12 @@ class Greeting extends React.Component {
             <div className="jumbotron">
                 <div className="container">
                     <h1>Scope out da Nightlife</h1>
-                    <p>Want to follow the herd or be have a romantic date? Login to see what's good tonight!</p>
+                    <p>Want to follow the herd or </p>
+                    <p>have a romantic date? </p>
 
                     <form action="" onSubmit={this.getBars} className="col-md-4">
 
-                        <TextFieldGroup error={this.state.errors.search} label="Search" onChange={this.handleChange} value={this.state.search} field="search"/>
+                        <TextFieldGroup placeholder="Enter City" error={this.state.errors.search} label="Search" onChange={this.handleChange} value={this.state.search} field="search"/>
                         <div className="form-group">
                             <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">
                                 Search
